@@ -1,0 +1,1 @@
+后端ssm + 前端bootstrap + mysql + redis + maven搭建的高并发秒杀系统
