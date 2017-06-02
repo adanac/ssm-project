@@ -1,1 +1,1 @@
-后端ssm + 前端bootstrap + mysql + redis + maven搭建的高并发秒杀系统
+后端ssm + 前端bootstrap + mysql + redis + maven + slf4j+logback搭建的高并发秒杀系统
