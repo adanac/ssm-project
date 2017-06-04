@@ -31,6 +31,7 @@ public class AccountServiceImpl implements AccountService {
             accountDao.inMoney(in, money);
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
+            throw new RuntimeException();
         }
     }
 }

@@ -20,7 +20,6 @@ import static org.junit.Assert.*;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:spring-config.xml")
 public class AccountServiceTest {
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     private AccountService accountService;
@@ -30,14 +29,7 @@ public class AccountServiceTest {
         Double money = 200d;
         String out = "aaa";
         String in = "bbb";
-        try {
-
-            accountService.transfer(out, in, money);
-        } catch (Exception e) {
-            logger.error(e.getMessage(), e);
-            throw new RuntimeException();
-        }
-
+        accountService.transfer(out, in, money);
     }
 
 }
