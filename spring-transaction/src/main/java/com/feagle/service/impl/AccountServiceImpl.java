@@ -21,27 +21,14 @@ public class AccountServiceImpl implements AccountService {
         this.accountDao = accountDao;
     }
 
-    //注入事务管理器的模板
-    private TransactionTemplate transactionTemplate;
-
-    public void setTransactionTemplate(TransactionTemplate transactionTemplate) {
-        this.transactionTemplate = transactionTemplate;
-    }
 
     @Override
     public void transfer(String out, String in, Double money) {
         logger.info("transfer...");
         try {
-            transactionTemplate.execute(new TransactionCallbackWithoutResult() {
-                @Override
-                protected void doInTransactionWithoutResult(TransactionStatus transactionStatus) {
-                    accountDao.outMoney(out, money);
-                    int i = 1 / 0 ;
-                    accountDao.inMoney(in, money);
-                }
-            });
-
-
+            accountDao.outMoney(out, money);
+            int i = 1 / 0;
+            accountDao.inMoney(in, money);
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
         }
