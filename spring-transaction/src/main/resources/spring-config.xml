@@ -33,28 +33,6 @@
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
-    <!--配置事务的通知:(事务的增强)-->
-    <tx:advice id="txAdvice" transaction-manager="transactionManager">
-        <tx:attributes>
-            <!--
-                propagation :事务传播行为
-                isolation   :事务隔离级别
-                read-only   :只读
-                rollback-for:发生哪些异常回滚
-                no-rollback-for:发生哪些异常不回滚
-                timeout     :过期信息
-
-            -->
-            <tx:method name="transfer" propagation="REQUIRED"/>
-        </tx:attributes>
-    </tx:advice>
-
-    <!--配置切面-->
-    <aop:config>
-        <!--配置切入点-->
-        <aop:pointcut id="pointcut1" expression="execution(* com.feagle.service.*.*(..))" />
-        <!--配置切面-->
-        <!--在切入点pointcut1上应用txAdvice增强-->
-        <aop:advisor advice-ref="txAdvice" pointcut-ref="pointcut1" />
-    </aop:config>
+    <!--开启事务管理-->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
 </beans>

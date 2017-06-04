@@ -5,12 +5,14 @@ import com.feagle.service.AccountService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionCallbackWithoutResult;
 import org.springframework.transaction.support.TransactionTemplate;
 
 /**
  * Created by Feagle on 2017/6/4.
  */
+@Transactional
 public class AccountServiceImpl implements AccountService {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
