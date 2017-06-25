@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+                      http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         version="3.0"
+         metadata-complete="true">
+
+
+    <!--<listener>-->
+    <!--<listener-class>com.feagle.listener.OnlineListener</listener-class>-->
+    <!--</listener>-->
+
+    <!--配置SpringMVC核心控制器，DispatchServlet-->
+    <servlet>
+        <servlet-name>springDispatchServlet</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <!--需要加载的配置文件-->
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath:spring/spring-web.xml</param-value>
+        </init-param>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>springDispatchServlet</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+
+    <!--配置404错误，只需此配置，无需过滤器实现-->
+    <error-page>
+        <error-code>404</error-code>
+        <location>/error.jsp</location>
+    </error-page>
+    <!--配置500错误，只需此配置，无需过滤器实现-->
+    <error-page>
+        <error-code>500</error-code>
+        <location>/error500.jsp</location>
+    </error-page>
+
+    <!--配置防乱码filter，本项目中通过自定义拦截器实现了编码设置，所以注释此过滤器-->
+    <!--<filter>-->
+    <!--<filter-name>characterEncodingFilter</filter-name>-->
+    <!--<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>-->
+    <!--&lt;!&ndash;启动时的设置请求参数为UTF-8&ndash;&gt;-->
+    <!--<init-param>-->
+    <!--<param-name>encoding</param-name>-->
+    <!--<param-value>UTF-8</param-value>-->
+    <!--</init-param>-->
+    <!--&lt;!&ndash;<init-param>&ndash;&gt;-->
+    <!--&lt;!&ndash;<param-name>forceEncoding</param-name>&ndash;&gt;-->
+    <!--&lt;!&ndash;<param-value>true</param-value>&ndash;&gt;-->
+    <!--&lt;!&ndash;</init-param>&ndash;&gt;-->
+    <!--</filter>-->
+    <!--<filter-mapping>-->
+    <!--<filter-name>characterEncodingFilter</filter-name>-->
+    <!--<url-pattern>/*</url-pattern>-->
+    <!--</filter-mapping>-->
+
+    <!--自定义编码过滤器-->
+    <filter>
+        <filter-name>myCharacterEncodingFilter</filter-name>
+        <filter-class>com.feagle.filter.MyCharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>charset</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>myCharacterEncodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <!--演示自定义过滤器配置 及 过滤器链-->
+    <filter>
+        <filter-name>myFilter1</filter-name>
+        <filter-class>com.feagle.filter.MyFilter1</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>myFilter1</filter-name>
+        <url-pattern>/index.jsp</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>myFilter2</filter-name>
+        <filter-class>com.feagle.filter.MyFilter2</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>myFilter2</filter-name>
+        <url-pattern>/index.jsp</url-pattern>
+    </filter-mapping>
+
+    <!--演示重定向或转发-->
+    <filter>
+        <filter-name>myFilter3</filter-name>
+        <filter-class>com.feagle.filter.MyFilter3</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>myFilter3</filter-name>
+        <url-pattern>/filter/first</url-pattern>
+    </filter-mapping>
+
+    <!--Error过滤器，捕捉并记录Error信息-->
+    <filter>
+        <filter-name>myExceptionFilter</filter-name>
+        <filter-class>com.feagle.filter.MyExceptionFilter</filter-class>
+        <async-supported>true</async-supported>
+        <init-param>
+            <param-name>errorPage</param-name>
+            <param-value>/error.jsp</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>myExceptionFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <!--配置servlet-->
+    <servlet>
+        <servlet-name>exceptionServlet</servlet-name>
+        <servlet-class>com.feagle.servlet.ExceptionServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>exceptionServlet</servlet-name>
+        <url-pattern>/servlet/exceptionServlet</url-pattern>
+    </servlet-mapping>
+
+
+    <!--演示servlet3.0支持异步操作的自定义过滤器-->
+    <filter>
+        <filter-name>myAsyncFilter</filter-name>
+        <filter-class>com.feagle.filter.MyAsyncFilter</filter-class>
+        <async-supported>true</async-supported>
+    </filter>
+    <filter-mapping>
+        <filter-name>myAsyncFilter</filter-name>
+        <url-pattern>/servlet/AsyncServlet,/servlet/asyncServlet</url-pattern>
+    </filter-mapping>
+    <servlet>
+        <servlet-name>asyncServlet</servlet-name>
+        <servlet-class>com.feagle.servlet.AsyncServlet</servlet-class>
+        <async-supported>true</async-supported>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>asyncServlet</servlet-name>
+        <url-pattern>/servlet/AsyncServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>asyncServlet</servlet-name>
+        <url-pattern>/servlet/asyncServlet</url-pattern>
+    </servlet-mapping>
+
+
+    <!--ip过滤器-->
+    <filter>
+        <filter-name>myIpFilter</filter-name>
+        <filter-class>com.feagle.filter.MyIpFilter</filter-class>
+        <async-supported>true</async-supported>
+        <init-param>
+            <param-name>forbidIps</param-name>
+            <param-value>192.168.1.101,127.0.0.1</param-value>
+        </init-param>
+        <init-param>
+            <param-name>excludePages</param-name>
+            <param-value>/servlet/AsyncServlet,/servlet/asyncServlet</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>myIpFilter</filter-name>
+        <url-pattern>/index</url-pattern>
+    </filter-mapping>
+
+    <!--自定义日志过滤器-->
+    <filter>
+        <filter-name>myLogFilter</filter-name>
+        <filter-class>com.feagle.filter.MyLogFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>myLogFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <!--自定义判断用户是否登录过滤器-->
+    <!--<filter>-->
+        <!--<filter-name>myAuthorityFilter</filter-name>-->
+        <!--<filter-class>com.feagle.filter.MyAuthorityFilter</filter-class>-->
+        <!--<init-param>-->
+            <!--<param-name>encoding</param-name>-->
+            <!--<param-value>UTF-8</param-value>-->
+        <!--</init-param>-->
+        <!--<init-param>-->
+            <!--<param-name>loginPage</param-name>-->
+            <!--<param-value>/login/login1</param-value>-->
+        <!--</init-param>-->
+    <!--</filter>-->
+    <!--<filter-mapping>-->
+        <!--<filter-name>myAuthorityFilter</filter-name>-->
+        <!--<url-pattern>/*</url-pattern>-->
+    <!--</filter-mapping>-->
+
+    <!--自定义用户登录过滤器-->
+    <filter>
+        <filter-name>myLoginFilter</filter-name>
+        <filter-class>com.feagle.filter.MyLoginFilter</filter-class>
+        <init-param>
+            <param-name>noLoginPaths</param-name>
+            <param-value>/index,/login/login1,/login/logout,/login/fail1,/login/fail2</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>myLoginFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <welcome-file-list>
+        <welcome-file>/index.jsp</welcome-file>
+    </welcome-file-list>
+</web-app>

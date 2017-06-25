@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="micromessage:war">
+    <output-path>$PROJECT_DIR$/../../ssm-project/micromessage/target</output-path>
+    <root id="archive" name="micromessage.war">
+      <element id="artifact" artifact-name="micromessage:war exploded" />
+    </root>
+  </artifact>
+</component>

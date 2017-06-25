@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="JavaKnow:war">
+    <output-path>$PROJECT_DIR$/../JavaKnow/target</output-path>
+    <root id="archive" name="ssm-javaknow.war">
+      <element id="artifact" artifact-name="JavaKnow:war exploded" />
+    </root>
+  </artifact>
+</component>

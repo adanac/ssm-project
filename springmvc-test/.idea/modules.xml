@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../JavaKnow/JavaKnow.iml" filepath="$PROJECT_DIR$/../JavaKnow/JavaKnow.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../ssm-project/micromessage/micromessage.iml" filepath="$PROJECT_DIR$/../../ssm-project/micromessage/micromessage.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../ssm-project/seckill/seckill.iml" filepath="$PROJECT_DIR$/../../ssm-project/seckill/seckill.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../ssm-project/RbacAuth/spring-rbac-auth.iml" filepath="$PROJECT_DIR$/../../ssm-project/RbacAuth/spring-rbac-auth.iml" />
+      <module fileurl="file://$PROJECT_DIR$/springmvc-test.iml" filepath="$PROJECT_DIR$/springmvc-test.iml" />
+    </modules>
+  </component>
+</project>

@@ -188,6 +188,7 @@
 
 
     <build>
+        <finalName>ssm-seckill</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
